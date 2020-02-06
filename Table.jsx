@@ -41,7 +41,7 @@ export default class Table extends React.Component {
         return <>
             {this.renderHeader()}
             {this.renderRows()}
-            <NewTableRow rowId={0} onAdd={()=>{}}/>
+            <NewTableRow rowId={0} onAdd={(e) => { console.log(e) }} />
         </>
     }
 }
