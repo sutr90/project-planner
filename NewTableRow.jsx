@@ -12,25 +12,25 @@ for (let i = 10; i < 36; i++) {
 }
 
 export default class NewTableRow extends React.Component {
-
-    handleChange = (value) => {
-        console.log(`selected ${value}`);
-    };
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
 
     render() {
         const { rowId } = this.props;
 
         return <Row className="table-row" type="flex" justify="space-around">
             <Col span={2}>{rowId}</Col>
-            <Col span={4}><Input /></Col>
-            <Col span={2}><InputNumber min={0} /></Col>
+            <Col span={4}><Input onChange={(value) => this.setState({name: value})}/></Col>
+            <Col span={2}><InputNumber min={0} onChange={(value) => this.setState({cost: value})}/></Col>
             <Col span={6}>
-                <Select mode="multiple" style={{ width: '100%' }} placeholder="Please select" onChange={this.handleChange} tokenSeparators={[',']}>
+                <Select mode="multiple" style={{ width: '100%' }} placeholder="Please select" onChange={(value) => this.setState({deps: value})} tokenSeparators={[',']}>
                     {children}
                 </Select>
             </Col>
-            <Col span={8}><Input /></Col>
-            <Col span={2}><Button>Add row</Button></Col>
+            <Col span={8}><Input onChange={(value) => this.setState({note: value})}/></Col>
+            <Col span={2}><Button onClick={(value) => this.props.onAdd(this.state)}>Add row</Button></Col>
         </Row>
     }
 }
