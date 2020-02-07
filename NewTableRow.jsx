@@ -16,7 +16,7 @@ function NewTableRow(props) {
         e.preventDefault();
         props.form.validateFields((err, values) => {
             if (!err) {
-                props.onAdd({ rowId, ...values });
+                props.onAdd({ id: rowId, ...values });
                 props.form.resetFields();
             }
         });

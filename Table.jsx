@@ -38,12 +38,9 @@ export default function Table() {
         return rows.map((row, index) => <TableRow key={`table-row-${index}`} row={row} />);
     };
 
-
     return <>
         {renderHeader()}
         {renderRows()}
-        <NewTableRow rowId={0} onAdd={(e) => {
-            addRow(e);
-        }} />
+        <NewTableRow rowId={rows.length} onAdd={addRow} />
     </>
 }
