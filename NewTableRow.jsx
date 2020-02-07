@@ -24,7 +24,7 @@ function NewTableRow(props) {
 
     return <Row className="table-row" onSubmit={handleSubmit}>
         <Form>
-            <Col sm={2}>{rowId}</Col>
+            <Col sm={1} offset={1}>{rowId}</Col>
             <Col sm={4}>
                 <Form.Item>
                     {getFieldDecorator('name', {

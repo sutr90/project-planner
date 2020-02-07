@@ -34,7 +34,7 @@ export default function Table() {
 
     const renderHeader = () => {
         return <Row className="table-header" gutter={8}>
-            <Col sm={2}>ID</Col>
+            <Col sm={1} offset={1}>ID</Col>
             <Col sm={4}>Name</Col>
             <Col sm={2}>Cost</Col>
             <Col sm={6}>Dependencies</Col>

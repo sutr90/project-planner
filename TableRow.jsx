@@ -7,10 +7,10 @@ export default function TableRow(props) {
     const { row } = props;
 
     return <Row className="table-row">
-        <Col sm={2}>{row.id}</Col>
+        <Col sm={1} offset={1}>{row.id}</Col>
         <Col sm={4}>{row.name}</Col>
         <Col sm={2}>{row.cost}</Col>
-        <Col sm={6}>{row.deps}</Col>
+        <Col sm={6}>{row.deps.join(",")}</Col>
         <Col sm={8}>{row.note}</Col>
         <Col sm={2} />
     </Row>
