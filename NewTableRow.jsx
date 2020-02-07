@@ -29,7 +29,7 @@ class NewTableRow extends React.Component {
 
     render() {
         const {rowId} = this.props;
-        return <Row className="table-row" gutter={16}>
+        return <Row className="table-row">
             <Form>
                 <Col sm={2}>{rowId}</Col>
                 <Col sm={4}>

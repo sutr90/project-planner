@@ -6,7 +6,7 @@ export default class AppLayout extends React.Component {
     render() {
         return <Row>
             <Col sm={12}><Table/></Col>
-            <Col sm={12}>right col</Col>
+            <Col sm={12}><Row gutter={8}>right col</Row></Col>
         </Row>
     }
 }

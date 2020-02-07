@@ -2,6 +2,7 @@ import { hot } from 'react-hot-loader';
 import React from 'react'
 import { Layout } from 'antd';
 import AppLayout from './AppLayout'
+import './global.scss'
 
 const { Header, Footer, Content } = Layout;
 
@@ -13,6 +14,6 @@ const App = () => (
     </Content>
     <Footer>Footer</Footer>
   </Layout>
-)
+);
 
 export default hot(module)(App);

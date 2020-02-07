@@ -7,7 +7,7 @@ export default class TableRow extends React.Component {
     render() {
         const { row } = this.props;
 
-        return <Row className="table-row" gutter={8}>
+        return <Row className="table-row">
             <Col sm={2}>{row.id}</Col>
             <Col sm={4}>{row.name}</Col>
             <Col sm={2}>{row.cost}</Col>
