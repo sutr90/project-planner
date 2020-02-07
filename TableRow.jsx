@@ -7,13 +7,13 @@ export default class TableRow extends React.Component {
     render() {
         const { row } = this.props;
 
-        return <Row className="table-row" type="flex" justify="space-around">
-            <Col span={2}>{row.id}</Col>
-            <Col span={4}>{row.name}</Col>
-            <Col span={2}>{row.cost}</Col>
-            <Col span={6}>{row.deps}</Col>
-            <Col span={8}>{row.note}</Col>
-            <Col span={2}></Col>
+        return <Row className="table-row" gutter={8}>
+            <Col sm={2}>{row.id}</Col>
+            <Col sm={4}>{row.name}</Col>
+            <Col sm={2}>{row.cost}</Col>
+            <Col sm={6}>{row.deps}</Col>
+            <Col sm={8}>{row.note}</Col>
+            <Col sm={2}/>
         </Row>
     }
 }

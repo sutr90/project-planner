@@ -21,13 +21,13 @@ export default class Table extends React.Component {
     }
 
     renderHeader = () => {
-        return <Row className="table-header" type="flex" justify="space-around">
-            <Col span={2}>ID</Col>
-            <Col span={4}>Name</Col>
-            <Col span={2}>Cost</Col>
-            <Col span={6}>Dependencies</Col>
-            <Col span={8}>Note</Col>
-            <Col span={2}></Col>
+        return <Row className="table-header" gutter={8}>
+            <Col sm={2}>ID</Col>
+            <Col sm={4}>Name</Col>
+            <Col sm={2}>Cost</Col>
+            <Col sm={6}>Dependencies</Col>
+            <Col sm={8}>Note</Col>
+            <Col sm={2}/>
         </Row>
     };
 

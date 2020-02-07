@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { Row, Col, InputNumber, Input, Select, Button } from 'antd';
+import {Row, Col, InputNumber, Input, Select, Button, Form} from 'antd';
 
-const { Option } = Select;
+const {Option} = Select;
 
 import './Table.scss'
 
@@ -11,29 +11,58 @@ for (let i = 10; i < 36; i++) {
     children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
 }
 
-export default class NewTableRow extends React.Component {
+class NewTableRow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.props.form.validateFields();
     }
 
-    render() {
-        const { rowId } = this.props;
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    };
 
-        return <Row className="table-row" type="flex" justify="space-around">
-            <Col span={2}>{rowId}</Col>
-            <Col span={4}><Input onChange={(e) => this.setState({name: e.target.value})}/></Col>
-            <Col span={2}><InputNumber min={0} onChange={(value) => this.setState({cost: value})}/></Col>
-            <Col span={6}>
-                <Select mode="multiple" style={{ width: '100%' }} placeholder="Please select" onChange={(value) => this.setState({deps: value})} tokenSeparators={[',']}>
-                    {children}
-                </Select>
+    render() {
+        const {rowId} = this.props;
+
+        return <Row className="table-row" gutter={8}>
+            <Col sm={2}>{rowId}</Col>
+            <Col sm={4}>
+                <Form.Item>
+                    <Input/></Form.Item>
             </Col>
-            <Col span={8}><Input onChange={(e) => this.setState({note: e.target.value})}/></Col>
-            <Col span={2}><Button onClick={(value) => this.props.onAdd(this.state)}>Add row</Button></Col>
+            <Col sm={2}>
+                <Form.Item>
+                    <InputNumber/>
+                </Form.Item>
+            </Col>
+            <Col sm={6}>
+                <Form.Item>
+                    <Select mode="multiple" style={{width: '100%'}} placeholder="Please select" tokenSeparators={[',']}>
+                        {children}
+                    </Select>
+                </Form.Item>
+            </Col>
+            <Col sm={8}>
+                <Form.Item>
+                    <Input/>
+                </Form.Item>
+            </Col>
+            <Col sm={2}>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">Add row</Button>
+                </Form.Item>
+            </Col>
         </Row>
     }
 }
+
+export default Form.create({name: 'new_row_form'})(NewTableRow);
 
 NewTableRow.propTypes = {
     rowId: PropTypes.number.isRequired,

@@ -4,9 +4,9 @@ import Table from './Table'
 
 export default class AppLayout extends React.Component {
     render() {
-        return <Row>
-            <Col span={12}><Table/></Col>
-            <Col span={12}>right col</Col>
+        return <Row gutter={8}>
+            <Col sm={12}><Table/></Col>
+            <Col sm={12}>right col</Col>
         </Row>
     }
 }
