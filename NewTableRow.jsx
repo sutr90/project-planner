@@ -29,35 +29,38 @@ class NewTableRow extends React.Component {
 
     render() {
         const {rowId} = this.props;
-
-        return <Row className="table-row" gutter={8}>
-            <Col sm={2}>{rowId}</Col>
-            <Col sm={4}>
-                <Form.Item>
-                    <Input/></Form.Item>
-            </Col>
-            <Col sm={2}>
-                <Form.Item>
-                    <InputNumber/>
-                </Form.Item>
-            </Col>
-            <Col sm={6}>
-                <Form.Item>
-                    <Select mode="multiple" style={{width: '100%'}} placeholder="Please select" tokenSeparators={[',']}>
-                        {children}
-                    </Select>
-                </Form.Item>
-            </Col>
-            <Col sm={8}>
-                <Form.Item>
-                    <Input/>
-                </Form.Item>
-            </Col>
-            <Col sm={2}>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">Add row</Button>
-                </Form.Item>
-            </Col>
+        return <Row className="table-row" gutter={16}>
+            <Form>
+                <Col sm={2}>{rowId}</Col>
+                <Col sm={4}>
+                    <Form.Item>
+                        <Input/>
+                    </Form.Item>
+                </Col>
+                <Col sm={2}>
+                    <Form.Item>
+                        <InputNumber/>
+                    </Form.Item>
+                </Col>
+                <Col sm={6}>
+                    <Form.Item>
+                        <Select mode="multiple" style={{width: '100%'}} placeholder="Please select"
+                                tokenSeparators={[',']}>
+                            {children}
+                        </Select>
+                    </Form.Item>
+                </Col>
+                <Col sm={8}>
+                    <Form.Item>
+                        <Input/>
+                    </Form.Item>
+                </Col>
+                <Col sm={2}>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit">Add row</Button>
+                    </Form.Item>
+                </Col>
+            </Form>
         </Row>
     }
 }

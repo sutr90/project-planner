@@ -1,6 +1,13 @@
 .table-header {
-    border-bottom: black solid thin;
-    .ant-col {
-        font-weight: bold;
-    }
+  border-bottom: black solid thin;
+
+  .ant-col {
+    font-weight: bold;
+  }
+}
+
+.table-row {
+  .ant-input-number {
+    width: 100%;
+  }
 }
