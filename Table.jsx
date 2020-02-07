@@ -6,15 +6,18 @@ import NewTableRow from './NewTableRow'
 import './Table.scss'
 
 export default function Table() {
-    const [rows, setRows] = useState(
-        [{
-            id: 0,
-            name: "start",
-            cost: 0,
-            deps: [],
-            note: ""
-        }]
-    );
+
+    const initialRows = () => JSON.parse(window.localStorage.getItem('rows')) || [{
+        id: 0,
+        name: "start",
+        cost: 0,
+        deps: [],
+        note: ""
+    }];
+
+    const [rows, setRows] = useState(initialRows);
+
+    useEffect(() => window.localStorage.setItem('rows', JSON.stringify(rows)), [rows]);
 
     const addRow = (rowValues) => {
         setRows([...rows, rowValues]);
