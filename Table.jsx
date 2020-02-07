@@ -24,13 +24,18 @@ export default function Table() {
 
     useEffect(() => {
         window.localStorage.setItem('rows', JSON.stringify(rows));
-
+        setOptions(rowsToOptions(rows));
     }, [rows]);
 
     const addRow = (rowValues) => {
         setRows([...rows, rowValues]);
-        setOptions([...options, ...rowsToOptions([rowValues])]);
     };
+
+    const handleDelete = (rowId) => {
+        setRows([...rows.filter(row => row.id !== rowId)]);
+    };
+
+    const handleEdit = (rowId) => { };
 
     const renderHeader = () => {
         return <Row className="table-header" gutter={8}>
@@ -44,7 +49,7 @@ export default function Table() {
     };
 
     const renderRows = () => {
-        return rows.map((row, index) => <TableRow key={`table-row-${index}`} row={row} />);
+        return rows.map((row, index) => <TableRow key={`table-row-${index}`} row={row} onDelete={handleDelete} onEdit={handleEdit} />);
     };
 
     return <>
