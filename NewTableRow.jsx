@@ -39,7 +39,7 @@ function NewTableRow(props) {
                 <Form.Item>
                     {getFieldDecorator('cost', {
                         rules: [{ required: true, message: 'Required value!' }],
-                    })(<InputNumber />)}
+                    })(<InputNumber min={0}/>)}
                 </Form.Item>
             </Col>
             <Col sm={6}>
