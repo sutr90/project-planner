@@ -7,7 +7,8 @@
     "antd": "^3.26.8",
     "parcel-bundler": "^1.12.4",
     "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react-dom": "^16.11.0",
+    "prop-types": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
