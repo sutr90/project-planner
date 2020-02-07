@@ -15,12 +15,21 @@ export default function Table() {
         note: ""
     }];
 
-    const [rows, setRows] = useState(initialRows);
+    const rowsToOptions = rowValues => {
+        return rowValues.map(row => { return { id: row.id, name: row.name }; });
+    };
 
-    useEffect(() => window.localStorage.setItem('rows', JSON.stringify(rows)), [rows]);
+    const [rows, setRows] = useState(initialRows);
+    const [options, setOptions] = useState(() => rowsToOptions(initialRows()))
+
+    useEffect(() => {
+        window.localStorage.setItem('rows', JSON.stringify(rows));
+
+    }, [rows]);
 
     const addRow = (rowValues) => {
         setRows([...rows, rowValues]);
+        setOptions([...options, ...rowsToOptions([rowValues])]);
     };
 
     const renderHeader = () => {
@@ -41,6 +50,6 @@ export default function Table() {
     return <>
         {renderHeader()}
         {renderRows()}
-        <NewTableRow rowId={rows.length} onAdd={addRow} />
+        <NewTableRow rowId={rows.length} options={options} onAdd={addRow} />
     </>
 }

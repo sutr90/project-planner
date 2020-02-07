@@ -6,11 +6,6 @@ const { Option } = Select;
 
 import './Table.scss'
 
-const children = [];
-for (let i = 10; i < 36; i++) {
-    children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-}
-
 function NewTableRow(props) {
     const handleSubmit = e => {
         e.preventDefault();
@@ -24,6 +19,8 @@ function NewTableRow(props) {
 
     const { rowId } = props;
     const { getFieldDecorator } = props.form;
+
+    const opts = props.options.map(option => <Option key={option.id} value={option.name}>{option.name}</Option>);
 
     return <Row className="table-row" onSubmit={handleSubmit}>
         <Form>
@@ -39,7 +36,7 @@ function NewTableRow(props) {
                 <Form.Item>
                     {getFieldDecorator('cost', {
                         rules: [{ required: true, message: 'Required value!' }],
-                    })(<InputNumber min={0}/>)}
+                    })(<InputNumber min={0} />)}
                 </Form.Item>
             </Col>
             <Col sm={6}>
@@ -48,7 +45,7 @@ function NewTableRow(props) {
                         rules: [{ required: true, message: 'Required value!' }],
                     })
                         (<Select mode="multiple" style={{ width: '100%' }} tokenSeparators={[',']}>
-                            {children}
+                            {opts}
                         </Select>)}
                 </Form.Item>
             </Col>
@@ -73,5 +70,6 @@ export default Form.create({ name: 'new_row_form' })(NewTableRow);
 
 NewTableRow.propTypes = {
     rowId: PropTypes.number.isRequired,
-    onAdd: PropTypes.func.isRequired
+    onAdd: PropTypes.func.isRequired,
+    options: PropTypes.array.isRequired,
 };
