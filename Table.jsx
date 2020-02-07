@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'antd';
+import {Row, Col} from 'antd';
 
 import TableRow from './TableRow'
 import NewTableRow from './NewTableRow'
@@ -20,6 +20,10 @@ export default class Table extends React.Component {
         }
     }
 
+    addRow = (rowValues) => {
+        this.setState({rows: [...this.state.rows, rowValues]})
+    };
+
     renderHeader = () => {
         return <Row className="table-header" gutter={8}>
             <Col sm={2}>ID</Col>
@@ -32,16 +36,19 @@ export default class Table extends React.Component {
     };
 
     renderRows = () => {
-        const { rows } = this.state;
+        const {rows} = this.state;
 
-        return rows.map((row, index) => <TableRow key={`table-row-${index}`} row={row} />);
+        return rows.map((row, index) => <TableRow key={`table-row-${index}`} row={row}/>);
     };
 
     render() {
         return <>
             {this.renderHeader()}
             {this.renderRows()}
-            <NewTableRow rowId={0} onAdd={(e) => { console.log(e) }} />
+            <NewTableRow rowId={0} onAdd={(e) => {
+                console.log("ba", e);
+                this.addRow(e);
+            }}/>
         </>
     }
 }

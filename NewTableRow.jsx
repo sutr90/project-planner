@@ -22,37 +22,49 @@ class NewTableRow extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.props.onAdd(values);
+                this.props.form.resetFields();
             }
         });
     };
 
     render() {
         const {rowId} = this.props;
-        return <Row className="table-row">
+        const {getFieldDecorator} = this.props.form;
+
+        return <Row className="table-row" onSubmit={this.handleSubmit}>
             <Form>
                 <Col sm={2}>{rowId}</Col>
                 <Col sm={4}>
                     <Form.Item>
-                        <Input/>
+                        {getFieldDecorator('name', {
+                            rules: [{required: true, message: 'Required value!'}],
+                        })(<Input/>)}
                     </Form.Item>
                 </Col>
                 <Col sm={2}>
                     <Form.Item>
-                        <InputNumber/>
+                        {getFieldDecorator('cost', {
+                            rules: [{required: true, message: 'Required value!'}],
+                        })(<InputNumber/>)}
                     </Form.Item>
                 </Col>
                 <Col sm={6}>
                     <Form.Item>
-                        <Select mode="multiple" style={{width: '100%'}} placeholder="Please select"
-                                tokenSeparators={[',']}>
+                        {getFieldDecorator('deps', {
+                            rules: [{required: true, message: 'Required value!'}],
+                        })
+                        (<Select mode="multiple" style={{width: '100%'}} tokenSeparators={[',']}>
                             {children}
-                        </Select>
+                        </Select>)}
                     </Form.Item>
                 </Col>
                 <Col sm={8}>
                     <Form.Item>
-                        <Input/>
+                        {getFieldDecorator('note', {
+                            rules: [{required: true, message: 'Required value!'}],
+                        })
+                        (<Input/>)}
                     </Form.Item>
                 </Col>
                 <Col sm={2}>
