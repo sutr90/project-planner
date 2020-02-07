@@ -20,7 +20,7 @@ function NewTableRow(props) {
     const { rowId } = props;
     const { getFieldDecorator } = props.form;
 
-    const opts = props.options.map(option => <Option key={option.id} value={option.name}>{option.name}</Option>);
+    const opts = props.options.map(option => <Option key={option.id} value={option.id} label={option.name}>{option.name}</Option>);
 
     return <Row className="table-row" onSubmit={handleSubmit}>
         <Form>
@@ -44,7 +44,11 @@ function NewTableRow(props) {
                     {getFieldDecorator('deps', {
                         rules: [{ required: true, message: 'Required value!' }],
                     })
-                        (<Select mode="multiple" style={{ width: '100%' }} tokenSeparators={[',']}>
+                        (<Select mode="multiple"
+                            style={{ width: '100%' }}
+                            tokenSeparators={[',']}
+                            filterOption={(input, option) => option.props.value === Number(input) || option.props.label.startsWith(input)}
+                            hide>
                             {opts}
                         </Select>)}
                 </Form.Item>
