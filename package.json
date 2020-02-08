@@ -5,10 +5,12 @@
   "main": "index.js",
   "dependencies": {
     "antd": "^3.26.8",
-    "parcel-bundler": "^1.12.4",
+    "keycharm": "^0.2.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "prop-types": "latest"
+    "vis-data": "^6.3.5",
+    "vis-network": "^7.3.4",
+    "vis-util": "^1.1.8"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -17,7 +19,9 @@
     "@babel/preset-react": "^7.8.3",
     "@hot-loader/react-dom": "^16.11.0",
     "react-hot-loader": "^4.12.19",
-    "sass": "^1.25.0"
+    "sass": "^1.25.0",
+    "parcel-bundler": "^1.12.4",
+    "prop-types": "latest"
   },
   "scripts": {
     "start": "parcel index.html",

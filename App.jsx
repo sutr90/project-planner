@@ -7,12 +7,12 @@ import './global.scss'
 const { Header, Footer, Content } = Layout;
 
 const App = () => (
-  <Layout>
+  <Layout style={{ height: "100vh", overflow: "auto" }}>
     <Header>Header</Header>
     <Content>
       <AppLayout />
     </Content>
-    <Footer>Footer</Footer>
+    {/* <Footer style={{backgroundColor: "blue"}}>Footer</Footer> */}
   </Layout>
 );
 

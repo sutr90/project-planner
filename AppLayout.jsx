@@ -1,10 +1,11 @@
 import React from 'react'
 import { Row, Col } from 'antd';
 import Table from './Table'
+import VisNetwork from './VisNetwork';
 
 export default function AppLayout() {
     return <Row>
         <Col sm={12}><Table /></Col>
-        <Col sm={12}><Row gutter={8}>right col</Row></Col>
+        <Col sm={12}><VisNetwork /></Col>
     </Row>
 }
