@@ -2,8 +2,10 @@ import React from 'react'
 import { Row, Col, Button, Icon } from 'antd';
 import PropTypes from 'prop-types';
 import './Table.scss'
+import { deleteRow } from './store/rowsSlice'
+import { connect } from 'react-redux';
 
-export default function TableRow(props) {
+const TableRow = (props) => {
     const { row } = props;
 
     return <Row className="table-row">
@@ -12,12 +14,19 @@ export default function TableRow(props) {
         <Col sm={2}>{row.cost}</Col>
         <Col sm={6}>{row.deps.join(",")}</Col>
         <Col sm={8}>{row.note}</Col>
-        <Col sm={2}><Button onClick={() => props.onEdit(row.id)} ><Icon type="edit" /></Button><Button onClick={() => props.onDelete(row.id)}> <Icon type="delete" /></Button></Col>
+        <Col sm={2}>
+            {!row.locked && <>
+                <Button onClick={() => console.log("edit")} ><Icon type="edit" /></Button>
+                <Button onClick={() => props.deleteRow(row.id)}> <Icon type="delete" /></Button>
+            </>
+            }
+        </Col>
     </Row >
 }
 
 TableRow.propTypes = {
     row: PropTypes.object.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired,
 };
+
+const mapDispatch = { deleteRow }
+export default connect(null, mapDispatch)(TableRow);

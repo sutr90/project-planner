@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types';
 import { Row, Col, InputNumber, Input, Select, Button, Form } from 'antd';
+import {addRow} from './store/rowsSlice'
+import { connect } from 'react-redux';
 
 const { Option } = Select;
 
 import './Table.scss'
 
-function NewTableRow(props) {
+const NewTableRow = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         props.form.validateFields((err, values) => {
             if (!err) {
-                props.onAdd({ id: rowId, ...values });
+                props.addRow({ id: rowId, ...values });
                 props.form.resetFields();
             }
         });
@@ -70,10 +72,13 @@ function NewTableRow(props) {
     </Row>
 }
 
-export default Form.create({ name: 'new_row_form' })(NewTableRow);
+const formObj = Form.create({ name: 'new_row_form' })(NewTableRow);
 
 NewTableRow.propTypes = {
     rowId: PropTypes.number.isRequired,
-    onAdd: PropTypes.func.isRequired,
     options: PropTypes.array.isRequired,
 };
+
+
+const mapDispatch = { addRow }
+export default connect(null, mapDispatch)(formObj);

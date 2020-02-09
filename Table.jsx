@@ -1,41 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'antd';
+import { connect } from 'react-redux';
 
 import TableRow from './TableRow'
 import NewTableRow from './NewTableRow'
 import './Table.scss'
 
-export default function Table() {
-
-    const initialRows = () => JSON.parse(window.localStorage.getItem('rows')) || [{
-        id: 0,
-        name: "start",
-        cost: 0,
-        deps: [],
-        note: ""
-    }];
+const Table = (props) => {
+    const {rows} = props;
 
     const rowsToOptions = rowValues => {
         return rowValues.map(row => { return { id: row.id, name: row.name }; });
     };
 
-    const [rows, setRows] = useState(initialRows);
-    const [options, setOptions] = useState(() => rowsToOptions(initialRows()))
+    const [options, setOptions] = useState(() => rowsToOptions(rows))
 
     useEffect(() => {
         window.localStorage.setItem('rows', JSON.stringify(rows));
         setOptions(rowsToOptions(rows));
     }, [rows]);
-
-    const addRow = (rowValues) => {
-        setRows([...rows, rowValues]);
-    };
-
-    const handleDelete = (rowId) => {
-        setRows([...rows.filter(row => row.id !== rowId)]);
-    };
-
-    const handleEdit = (rowId) => { };
 
     const renderHeader = () => {
         return <Row className="table-header" gutter={8}>
@@ -49,12 +32,20 @@ export default function Table() {
     };
 
     const renderRows = () => {
-        return rows.map((row, index) => <TableRow key={`table-row-${index}`} row={row} onDelete={handleDelete} onEdit={handleEdit} />);
+        return rows.map((row, index) => <TableRow key={`table-row-${index}`} row={row} />);
     };
 
     return <>
         {renderHeader()}
         {renderRows()}
-        <NewTableRow rowId={rows.length} options={options} onAdd={addRow} />
+        <NewTableRow rowId={rows.length} options={options} />
     </>
 }
+
+const mapStateToProps = state => {
+    return {
+        rows: state.rows,
+    }
+}
+
+export default connect(mapStateToProps)(Table);
