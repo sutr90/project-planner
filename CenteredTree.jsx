@@ -1,5 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Tree, { treeUtil } from "react-d3-tree";
+import { Empty } from 'antd';
+
 import { connect } from 'react-redux'
 const debugData = [{
   "parent": "CSVNode1",
@@ -204,8 +206,33 @@ const CenteredTree = props => {
     return { x: 0, y: 0 };
   }
 
-  const data = _transformToHierarchy(debugData, ["attA", "attB"]);
-  console.log(data)
+
+  const rowsToData = () => {
+
+    const getRowById = (id) => {
+      return props.rows.filter(row => row.id === id);
+    };
+
+
+    const data = [];
+    props.rows.forEach(row => {
+      row.deps.forEach(dep => {
+        const parent = getRowById(dep);
+        data.push({ parent: dep, child: row.id, name: row.name })
+      });
+    });
+
+    return data;
+  };
+
+
+  if (props.rows.length <= 1) {
+    return <Empty />;
+  }
+
+  const data = _transformToHierarchy(rowsToData());
+  console.log(rowsToData());
+  console.log(data);
   return <div style={containerStyles} ref={ref}>
     <Tree
       data={data}
