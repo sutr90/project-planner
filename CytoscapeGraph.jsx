@@ -60,7 +60,18 @@ const cytograph = (props) => {
                 'line-color': '#ffaaaa',
                 'target-arrow-color': '#ffaaaa'
             }
-        }]}
+        },
+        {
+            "selector": "node",
+            "style": {
+              "content": "data(label)",
+              "font-size": "12px",
+              "text-valign": "center",
+              "text-halign": "center",
+              "color": "#fff",
+            }
+          }
+    ]}
 
         cy={handleCy}
 
