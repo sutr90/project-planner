@@ -131,21 +131,22 @@ const containerStyles = {
 function _transformToHierarchy(links, attributeFields) {
   const nodesByName = {};
 
-  const assignNode = name => {
-    if (!nodesByName[name]) {
-      nodesByName[name] = { name };
+  const assignNode = link => {
+    if (!nodesByName[link.parent]) {
+      nodesByName[link.parent] = { rowId: link.parent, name: link.name };
     }
-    return nodesByName[name];
+    return nodesByName[link.parent];
   };
 
-  const assignNodeWithAttributes = (name, attributes) => {
-    if (!nodesByName[name]) {
-      nodesByName[name] = {
-        name,
+  const assignNodeWithAttributes = (link, attributes) => {
+    if (!nodesByName[link.child]) {
+      nodesByName[link.child] = {
+        rowId: link.child,
+        name: link.name,
         attributes,
       };
     }
-    return nodesByName[name];
+    return nodesByName[link.child];
   };
 
   // Create nodes for each unique source and target.
@@ -159,8 +160,8 @@ function _transformToHierarchy(links, attributeFields) {
       link.attributes = customAttributes;
     }
 
-    link.source = assignNode(link.parent);
-    link.target = assignNodeWithAttributes(link.child, link.attributes);
+    link.source = assignNode(link);
+    link.target = assignNodeWithAttributes(link, link.attributes);
     const parent = link.source;
     const child = link.target;
 
@@ -178,9 +179,6 @@ function _transformToHierarchy(links, attributeFields) {
   const rootLinks = links.filter(link => !link.source.parent);
   return [rootLinks[0].source];
 }
-
-
-
 
 function useClientRect() {
   const [rect, setRect] = useState(null);
@@ -206,7 +204,6 @@ const CenteredTree = props => {
     return { x: 0, y: 0 };
   }
 
-
   const rowsToData = () => {
 
     const getRowById = (id) => {
@@ -226,13 +223,42 @@ const CenteredTree = props => {
   };
 
 
+  const rowsToHierarchy = () => {
+    const rowToNode = row => {
+      return {
+        rowId: row.id,
+        name: row.name,
+        attributes: undefined,
+        children: []
+      };
+    };
+
+    const getNodeByRowId = (id) => {
+      return nodes.filter(node => node.rowId === id)[0];
+    };
+
+    const { rows } = props;
+
+    const nodes = rows.map(row => rowToNode(row));
+
+    rows.forEach(row => {
+      row.deps.forEach(dep => {
+        const parent = getNodeByRowId(dep);
+        parent.children.push({ ...getNodeByRowId(row.id) });
+      });
+    });
+
+    return nodes[0];
+  };
+
+
   if (props.rows.length <= 1) {
     return <Empty />;
   }
 
-  const data = _transformToHierarchy(rowsToData());
-  console.log(rowsToData());
-  console.log(data);
+  // const data = _transformToHierarchy(rowsToData());
+  const data = rowsToHierarchy();
+  console.log(rowsToHierarchy());
   return <div style={containerStyles} ref={ref}>
     <Tree
       data={data}
