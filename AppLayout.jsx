@@ -1,7 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'antd';
 import Table from './Table'
-import CenteredTree from './CenteredTree';
 import CytoscapeGraph from './CytoscapeGraph';
 
 export default function AppLayout() {
