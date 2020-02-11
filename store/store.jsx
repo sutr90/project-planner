@@ -6,7 +6,8 @@ export default function configureAppStore(preloadedState = {}) {
         reducer: rootReducer,
         middleware: [...getDefaultMiddleware()],
         preloadedState
-    })
+    });
+
     if (process.env.NODE_ENV !== 'production' && module.hot) {
         module.hot.accept('./index', () => store.replaceReducer(rootReducer))
     }

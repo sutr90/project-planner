@@ -17,6 +17,7 @@ const App = () => {
     deps: [],
     note: "",
     locked: true,
+    editable: false
   }];
 
   const store = configureAppStore({ rows: initialRows });

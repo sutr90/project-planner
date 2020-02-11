@@ -1,12 +1,12 @@
 import React from 'react'
-import { Row, Col, Button, Icon } from 'antd';
+import {Row, Col, Button, Icon} from 'antd';
 import PropTypes from 'prop-types';
 import './Table.scss'
-import { deleteRow } from './store/rowsSlice'
-import { connect } from 'react-redux';
+import {deleteRow, toggleRowEditable} from './store/rowsSlice'
+import {connect} from 'react-redux';
 
 const TableRow = (props) => {
-    const { row } = props;
+    const {row} = props;
 
     return <Row className="table-row">
         <Col sm={1} offset={1}>{row.id}</Col>
@@ -16,17 +16,17 @@ const TableRow = (props) => {
         <Col sm={8}>{row.note}</Col>
         <Col sm={2}>
             {!row.locked && <>
-                <Button onClick={() => console.log("edit")} ><Icon type="edit" /></Button>
-                <Button onClick={() => props.deleteRow(row.id)}> <Icon type="delete" /></Button>
+                <Button onClick={() => props.toggleRowEditable({id: row.id, editable: !row.editable})}><Icon type="edit"/></Button>
+                <Button onClick={() => props.deleteRow(row.id)}><Icon type="delete"/></Button>
             </>
             }
         </Col>
-    </Row >
-}
+    </Row>
+};
 
 TableRow.propTypes = {
     row: PropTypes.object.isRequired,
 };
 
-const mapDispatch = { deleteRow }
+const mapDispatch = {deleteRow, toggleRowEditable};
 export default connect(null, mapDispatch)(TableRow);

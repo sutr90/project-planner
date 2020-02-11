@@ -13,7 +13,7 @@ const NewTableRow = (props) => {
         e.preventDefault();
         props.form.validateFields((err, values) => {
             if (!err) {
-                props.addRow({ id: rowId, ...values });
+                props.addRow({ id: rowId, ...values, editable: false });
                 props.form.resetFields();
             }
         });

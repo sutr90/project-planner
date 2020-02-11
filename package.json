@@ -6,7 +6,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "1.2.3",
     "antd": "3.26.8",
-    "cytoscape": "^3.14.0",
+    "cytoscape": "3.14.0",
     "react": "16.11.0",
     "react-cytoscapejs": "1.2.1",
     "react-dom": "16.11.0",
