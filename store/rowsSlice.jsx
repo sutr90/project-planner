@@ -1,32 +1,35 @@
-import {createSlice} from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
 
 const rowsSlice = createSlice({
     name: 'rows',
     initialState: [],
     reducers: {
-        addRow(state, action) {
+        addRow(rows, action) {
             const row = action.payload;
-            return [...state, row];
+            rows.push(row);
+            return rows;
         },
-        deleteRow(state, action) {
+        deleteRow(rows, action) {
             const id = action.payload;
-            return state.filter(row => row.id !== id);
-        },
-        toggleRowEditable(state, action) {
-            const {id} = action.payload;
-            return state.map(row => {
-                if (row.id !== id) {
-                    return row;
-                }
 
-                return {
-                    ...row,
-                    editable: !row.editable
-                }
+            const idx = rows.findIndex(row => row.id === id);
+
+            rows.splice(idx, 1);
+            rows.forEach(row => {
+                const depIdx = row.deps.findIndex(dep => dep === id);
+                row.deps.splice(depIdx, 1);
             })
+
+            return rows;
+        },
+        toggleRowEditable(rows, action) {
+            const { id } = action.payload;
+            const row = rows.find(row => row.id === id);
+            row.editable = !row.editable;
+            return rows;
         }
     }
 });
 
-export const {addRow, deleteRow, toggleRowEditable} = rowsSlice.actions;
+export const { addRow, deleteRow, toggleRowEditable } = rowsSlice.actions;
 export default rowsSlice.reducer;

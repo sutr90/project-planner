@@ -9,15 +9,8 @@ import './Table.scss'
 const Table = (props) => {
     const {rows} = props;
 
-    const rowsToOptions = rowValues => {
-        return rowValues.map(row => { return { id: row.id, name: row.name }; });
-    };
-
-    const [options, setOptions] = useState(() => rowsToOptions(rows))
-
     useEffect(() => {
         window.localStorage.setItem('rows', JSON.stringify(rows));
-        setOptions(rowsToOptions(rows));
     }, [rows]);
 
     const renderHeader = () => {
@@ -38,7 +31,7 @@ const Table = (props) => {
     return <>
         {renderHeader()}
         {renderRows()}
-        <NewTableRow rowId={rows.length} options={options} />
+        <NewTableRow rowId={rows.length} />
     </>
 }
 

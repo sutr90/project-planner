@@ -78,7 +78,6 @@ const formObj = Form.create({name: 'row_form'})(RowForm);
 
 RowForm.propTypes = {
     rowId: PropTypes.number.isRequired,
-    options: PropTypes.array.isRequired,
     onSubmit: PropTypes.func.isRequired,
 };
 
