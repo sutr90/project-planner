@@ -1,6 +1,7 @@
 import React from 'react'
 import { addRow } from './store/rowsSlice'
 import { connect } from 'react-redux';
+import { Button } from 'antd';
 
 import './Table.scss'
 import RowForm from "./RowForm";
@@ -12,13 +13,15 @@ const NewTableRow = (props) => {
 
     const { rowId } = props;
 
-    return <RowForm rowId={rowId} onSubmit={handleSubmit} />
+    const buttons = <Button type="primary" htmlType="submit">Add row</Button>;
+
+    return <RowForm rowId={rowId} onSubmit={handleSubmit} buttons={buttons}/>
 };
 
 const mapDispatch = { addRow };
 
 const mapState = (state) => {
-    return { rowId: 1 + (state.rows.reduce((a, b) => Math.max(a.id, b.id))) };
+    return { rowId: 1 + Math.max(...state.rows.map(r => r.id)) };
 };
 
 export default connect(mapState, mapDispatch)(NewTableRow);

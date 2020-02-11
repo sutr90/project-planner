@@ -9,6 +9,12 @@ const rowsSlice = createSlice({
             rows.push(row);
             return rows;
         },
+        updateRow(rows, action) {
+            const row = action.payload;
+            const idx = rows.findIndex(r => r.id === row.id);
+            rows[idx] = row;
+            return rows;
+        },
         deleteRow(rows, action) {
             const id = action.payload;
 
@@ -31,5 +37,5 @@ const rowsSlice = createSlice({
     }
 });
 
-export const { addRow, deleteRow, toggleRowEditable } = rowsSlice.actions;
+export const { addRow, deleteRow, toggleRowEditable, updateRow } = rowsSlice.actions;
 export default rowsSlice.reducer;

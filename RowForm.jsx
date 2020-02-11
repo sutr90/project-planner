@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import {Row, Col, InputNumber, Input, Select, Button, Form} from 'antd';
-import {addRow} from './store/rowsSlice'
-import {connect} from 'react-redux';
+import { Row, Col, InputNumber, Input, Select, Button, Form } from 'antd';
+import { addRow } from './store/rowsSlice'
+import { connect } from 'react-redux';
 
-const {Option} = Select;
+const { Option } = Select;
 
 import './Table.scss'
-import {getRowOptions} from "./store/selector";
+import { getRowOptions } from "./store/selector";
 
 const RowForm = (props) => {
     const handleSubmit = e => {
@@ -20,11 +20,11 @@ const RowForm = (props) => {
         });
     };
 
-    const {rowId} = props;
-    const {getFieldDecorator} = props.form;
+    const { rowId } = props;
+    const { getFieldDecorator } = props.form;
 
     const opts = props.rowOptions.map(option => <Option key={option.id} value={option.id}
-                                                     label={option.name}>{option.name}</Option>);
+        label={option.name}>{option.name}</Option>);
 
     return <Row className="table-row" onSubmit={handleSubmit}>
         <Form>
@@ -32,57 +32,62 @@ const RowForm = (props) => {
             <Col sm={4}>
                 <Form.Item>
                     {getFieldDecorator('name', {
-                        rules: [{required: true, message: 'Required value!'}],
-                    })(<Input/>)}
+                        initialValue: props.init && props.init.name,
+                        rules: [{ required: true, message: 'Required value!' }],
+                    })(<Input />)}
                 </Form.Item>
             </Col>
             <Col sm={2}>
                 <Form.Item>
                     {getFieldDecorator('cost', {
-                        rules: [{required: true, message: 'Required value!'}],
-                    })(<InputNumber min={0}/>)}
+                        initialValue: props.init && props.init.cost,
+                        rules: [{ required: true, message: 'Required value!' }],
+                    })(<InputNumber min={0} />)}
                 </Form.Item>
             </Col>
             <Col sm={6}>
                 <Form.Item>
                     {getFieldDecorator('deps', {
-                        rules: [{required: true, message: 'Required value!'}],
+                        initialValue: props.init && props.init.deps,
+                        rules: [{ required: true, message: 'Required value!' }],
                     })
-                    (<Select mode="multiple"
-                             style={{width: '100%'}}
-                             tokenSeparators={[',']}
-                             filterOption={(input, option) => option.props.value === Number(input) || option.props.label.startsWith(input)}
-                             hide>
-                        {opts}
-                    </Select>)}
+                        (<Select mode="multiple"
+                            style={{ width: '100%' }}
+                            tokenSeparators={[',']}
+                            filterOption={(input, option) => option.props.value === Number(input) || option.props.label.startsWith(input)}
+                            hide>
+                            {opts}
+                        </Select>)}
                 </Form.Item>
             </Col>
             <Col sm={8}>
                 <Form.Item>
                     {getFieldDecorator('note', {
-                        rules: [{required: true, message: 'Required value!'}],
+                        initialValue: props.init && props.init.note,
+                        rules: [{ required: true, message: 'Required value!' }],
                     })
-                    (<Input/>)}
+                        (<Input />)}
                 </Form.Item>
             </Col>
             <Col sm={2}>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">Add row</Button>
+                    {props.buttons}
                 </Form.Item>
             </Col>
         </Form>
     </Row>
 };
 
-const formObj = Form.create({name: 'row_form'})(RowForm);
+const formObj = Form.create({ name: 'row_form' })(RowForm);
 
 RowForm.propTypes = {
     rowId: PropTypes.number.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    init: PropTypes.object,
 };
 
 
-const mapDispatch = {addRow};
+const mapDispatch = { addRow };
 
 const mapState = (state) => {
     return {
