@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
 
@@ -31,7 +31,7 @@ const Table = (props) => {
     return <>
         {renderHeader()}
         {renderRows()}
-        <NewTableRow rowId={rows.length} />
+        <NewTableRow />
     </>
 }
 
