@@ -21,7 +21,7 @@ const rowsSlice = createSlice({
 
                 return {
                     ...row,
-                    ...action.payload
+                    editable: !row.editable
                 }
             })
         }
