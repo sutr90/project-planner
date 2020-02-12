@@ -48,8 +48,7 @@ const RowForm = (props) => {
             <Col sm={6}>
                 <Form.Item>
                     {getFieldDecorator('deps', {
-                        initialValue: props.init && props.init.deps,
-                        rules: [{ required: true, message: 'Required value!' }],
+                        initialValue: props.init && props.init.deps
                     })
                         (<Select mode="multiple"
                             style={{ width: '100%' }}

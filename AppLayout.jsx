@@ -5,7 +5,7 @@ import CytoscapeGraph from './CytoscapeGraph';
 
 export default function AppLayout() {
     return <Row>
-        <Col sm={12}><Table /></Col>
-        <Col sm={12}><CytoscapeGraph /></Col>
+        <Col sm={8}><Table /></Col>
+        <Col sm={16}><CytoscapeGraph /></Col>
     </Row>
 }

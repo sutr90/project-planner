@@ -8,6 +8,8 @@ import RowForm from "./RowForm";
 
 const NewTableRow = (props) => {
     const handleSubmit = values => {
+        values.deps = values.deps || [];
+
         props.addRow({ id: rowId, ...values, editable: false });
     };
 
