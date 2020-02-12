@@ -5,6 +5,7 @@ import AppLayout from './AppLayout';
 import './global.scss';
 import configureAppStore from './store/store';
 import { Provider } from 'react-redux';
+import FileMenu from './FileMenu';
 
 const { Header, Content } = Layout;
 
@@ -24,7 +25,7 @@ const App = () => {
 
   return <Provider store={store}>
     <Layout style={{ height: "100vh", overflow: "auto" }}>
-      <Header>Header</Header>
+      <Header><FileMenu /></Header>
       <Content>
         <AppLayout />
       </Content>

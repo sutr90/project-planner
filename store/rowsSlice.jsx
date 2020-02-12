@@ -28,6 +28,10 @@ const rowsSlice = createSlice({
 
             return rows;
         },
+        loadRows(rows, action) {
+            rows = action.payload;
+            return rows;
+        },
         toggleRowEditable(rows, action) {
             const { id } = action.payload;
             const row = rows.find(row => row.id === id);
@@ -37,5 +41,5 @@ const rowsSlice = createSlice({
     }
 });
 
-export const { addRow, deleteRow, toggleRowEditable, updateRow } = rowsSlice.actions;
+export const { addRow, deleteRow, toggleRowEditable, updateRow, loadRows } = rowsSlice.actions;
 export default rowsSlice.reducer;

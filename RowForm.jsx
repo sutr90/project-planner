@@ -63,8 +63,7 @@ const RowForm = (props) => {
             <Col sm={8}>
                 <Form.Item>
                     {getFieldDecorator('note', {
-                        initialValue: props.init && props.init.note,
-                        rules: [{ required: true, message: 'Required value!' }],
+                        initialValue: props.init && props.init.note
                     })
                         (<Input />)}
                 </Form.Item>

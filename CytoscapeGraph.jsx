@@ -35,42 +35,40 @@ const cytograph = (props) => {
         });
     };
 
-    console.log(rowsToHierarchy());
-
     return <CytoscapeComponent elements={[...rowsToHierarchy()]} style={{
         width: '100%',
         height: '90vh',
         overflow: 'hidden'
     }}
-                               layout={{
-                                   name: 'breadthfirst',
-                                   directed: true,
-                                   padding: 10
-                               }}
+    layout={{
+    name: 'breadthfirst',
+    directed: true,
+    padding: 10
+    }}
 
-                               stylesheet={[{
-                                   selector: 'edge',
-                                   style: {
-                                       'curve-style': 'bezier',
-                                       'width': 6,
-                                       'target-arrow-shape': 'triangle',
-                                       'line-color': '#ffaaaa',
-                                       'target-arrow-color': '#ffaaaa'
-                                   }
-                               },
-                                   {
-                                       "selector": "node",
-                                       "style": {
-                                           "content": "data(label)",
-                                           "font-size": "12px",
-                                           "text-valign": "center",
-                                           "text-halign": "center",
-                                           "color": "#fff",
-                                       }
-                                   }
-                               ]}
+    stylesheet={[{
+    selector: 'edge',
+    style: {
+        'curve-style': 'bezier',
+        'width': 6,
+        'target-arrow-shape': 'triangle',
+        'line-color': '#ffaaaa',
+        'target-arrow-color': '#ffaaaa'
+    }
+    },
+    {
+        "selector": "node",
+        "style": {
+            "content": "data(label)",
+            "font-size": "12px",
+            "text-valign": "center",
+            "text-halign": "center",
+            "color": "#fff",
+        }
+    }
+    ]}
 
-                               cy={handleCy}
+    cy={handleCy}
 
     />;
 };
