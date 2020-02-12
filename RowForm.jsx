@@ -34,7 +34,7 @@ const RowForm = (props) => {
                     {getFieldDecorator('name', {
                         initialValue: props.init && props.init.name,
                         rules: [{ required: true, message: 'Required value!' }],
-                    })(<Input />)}
+                    })(<Input autoFocus />)}
                 </Form.Item>
             </Col>
             <Col sm={2}>
@@ -42,7 +42,7 @@ const RowForm = (props) => {
                     {getFieldDecorator('cost', {
                         initialValue: props.init && props.init.cost,
                         rules: [{ required: true, message: 'Required value!' }],
-                    })(<InputNumber min={0} />)}
+                    })(<InputNumber min={0} decimalSeparator=","/>)}
                 </Form.Item>
             </Col>
             <Col sm={6}>
