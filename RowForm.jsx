@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types';
-import { Row, Col, InputNumber, Input, Select, Button, Form } from 'antd';
+import { Row, Col, InputNumber, Input, Select, Form } from 'antd';
 import { addRow } from './store/rowsSlice'
 import { connect } from 'react-redux';
 import fuzzysort from 'fuzzysort';
@@ -11,12 +11,15 @@ import './Table.scss'
 import { getRowOptions } from "./store/selector";
 
 const RowForm = (props) => {
+    const inputEl = useRef(null);
+
     const handleSubmit = e => {
         e.preventDefault();
         props.form.validateFields((err, values) => {
             if (!err) {
                 props.onSubmit(values);
                 props.form.resetFields();
+                inputEl.current.focus();
             }
         });
     };
@@ -43,7 +46,7 @@ const RowForm = (props) => {
                     {getFieldDecorator('name', {
                         initialValue: props.init && props.init.name,
                         rules: [{ required: true, message: 'Required value!' }],
-                    })(<Input autoFocus />)}
+                    })(<Input autoFocus ref={inputEl} />)}
                 </Form.Item>
             </Col>
             <Col sm={2}>
