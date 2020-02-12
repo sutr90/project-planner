@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, InputNumber, Input, Select, Button, Form } from 'antd';
 import { addRow } from './store/rowsSlice'
 import { connect } from 'react-redux';
+import fuzzysort from 'fuzzysort';
 
 const { Option } = Select;
 
@@ -26,6 +27,14 @@ const RowForm = (props) => {
     const opts = props.rowOptions.map(option => <Option key={option.id} value={option.id}
         label={option.name}>{option.name}</Option>);
 
+    const filterOption = (input, option) => {
+        if (option.props.value !== Number(input)) {
+            return fuzzysort.go(input, [option.props.label]).length === 1;
+        }
+
+        return true;
+    };
+
     return <Row className="table-row" onSubmit={handleSubmit}>
         <Form>
             <Col sm={1} offset={1}>{rowId}</Col>
@@ -42,7 +51,7 @@ const RowForm = (props) => {
                     {getFieldDecorator('cost', {
                         initialValue: props.init && props.init.cost,
                         rules: [{ required: true, message: 'Required value!' }],
-                    })(<InputNumber min={0} decimalSeparator=","/>)}
+                    })(<InputNumber min={0} decimalSeparator="," />)}
                 </Form.Item>
             </Col>
             <Col sm={6}>
@@ -53,7 +62,7 @@ const RowForm = (props) => {
                         (<Select mode="multiple"
                             style={{ width: '100%' }}
                             tokenSeparators={[',']}
-                            filterOption={(input, option) => option.props.value === Number(input) || option.props.label.startsWith(input)}
+                            filterOption={filterOption}
                             hide>
                             {opts}
                         </Select>)}
