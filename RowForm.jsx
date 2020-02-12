@@ -41,7 +41,7 @@ const RowForm = (props) => {
     return <Row className="table-row" onSubmit={handleSubmit}>
         <Form>
             <Col sm={1} offset={1}>{rowId}</Col>
-            <Col sm={4}>
+            <Col sm={8}>
                 <Form.Item>
                     {getFieldDecorator('name', {
                         initialValue: props.init && props.init.name,
@@ -71,7 +71,7 @@ const RowForm = (props) => {
                         </Select>)}
                 </Form.Item>
             </Col>
-            <Col sm={8}>
+            <Col sm={4}>
                 <Form.Item>
                     {getFieldDecorator('note', {
                         initialValue: props.init && props.init.note

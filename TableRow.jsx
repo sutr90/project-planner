@@ -22,10 +22,10 @@ const TableRow = (props) => {
 
     return <Row className="table-row">
         <Col sm={1} offset={1}>{row.id}</Col>
-        <Col sm={4}>{row.name}</Col>
-        <Col sm={2}>{row.cost}</Col>
-        <Col sm={6}>{row.deps.join(",")}</Col>
-        <Col sm={8}>{row.note}</Col>
+        <Col sm={8}>{row.name}</Col>
+        <Col sm={2} style={{textAlign: "right"}}>{row.cost}</Col>
+        <Col sm={6} style={{textAlign: "right"}}>{row.deps.join(",")}</Col>
+        <Col sm={4}>{row.note}</Col>
         <Col sm={2}>
             {!row.locked && <>
                 <Button onClick={() => props.toggleRowEditable({ id: row.id })}><Icon type="edit" /></Button>
