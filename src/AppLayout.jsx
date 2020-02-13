@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col } from 'antd';
-import Table from './Table'
-import CytoscapeGraph from './CytoscapeGraph';
+import Table from './components/Table'
+import CytoscapeGraph from './components/CytoscapeGraph';
 
 export default function AppLayout() {
     return <Row>

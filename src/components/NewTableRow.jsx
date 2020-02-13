@@ -1,5 +1,5 @@
 import React from 'react'
-import { addRow } from './store/rowsSlice'
+import { addRow } from '../store/rowsSlice'
 import { connect } from 'react-redux';
 import { Button } from 'antd';
 

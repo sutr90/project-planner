@@ -1,14 +1,14 @@
 import React, { useRef } from 'react'
 import PropTypes from 'prop-types';
 import { Row, Col, InputNumber, Input, Select, Form } from 'antd';
-import { addRow } from './store/rowsSlice'
+import { addRow } from '../store/rowsSlice'
 import { connect } from 'react-redux';
 import fuzzysort from 'fuzzysort';
 
 const { Option } = Select;
 
 import './Table.scss'
-import { getRowOptions } from "./store/selector";
+import { getRowOptions } from "../store/selector";
 
 const RowForm = (props) => {
     const inputEl = useRef(null);

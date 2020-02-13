@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col, Button, Icon } from 'antd';
 import PropTypes from 'prop-types';
 import './Table.scss'
-import { deleteRow, toggleRowEditable, updateRow } from './store/rowsSlice'
+import { deleteRow, toggleRowEditable, updateRow } from '../store/rowsSlice'
 import { connect } from 'react-redux';
 import RowForm from "./RowForm";
 

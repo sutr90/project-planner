@@ -5,7 +5,7 @@ import AppLayout from './AppLayout';
 import './global.scss';
 import configureAppStore from './store/store';
 import { Provider } from 'react-redux';
-import FileMenu from './FileMenu';
+import FileMenu from './components/FileMenu';
 
 const { Header, Content } = Layout;
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Upload, Icon } from "antd"
 import { connect } from 'react-redux'
 import { saveAs } from 'file-saver';
-import { loadRows } from './store/rowsSlice'
+import { loadRows } from '../store/rowsSlice'
 
 const FileMenu = (props) => {
 
