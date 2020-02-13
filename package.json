@@ -29,7 +29,8 @@
   "scripts": {
     "start": "parcel src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build src/index.html --no-cache --public-url ./ --experimental-scope-hoisting --no-source-maps"
+    "build": "parcel build src/index.html --no-cache --public-url ./ --experimental-scope-hoisting --no-source-maps",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "alias": {
     "react-dom": "@hot-loader/react-dom"
