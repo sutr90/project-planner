@@ -4,18 +4,18 @@ import { Empty } from 'antd'
 import { connect } from 'react-redux'
 
 const cytograph = (props) => {
+    const { rows } = props;
+
     const rowsToHierarchy = () => {
         const rowToNode = row => {
-            return [{ data: { id: row.id, label: row.name } }, ...rowToEdge(row)];
+            return [{ data: { id: row.id, label: `[${row.id}] ${row.name} (${row.cost})` } }, ...rowToEdge(row)];
         };
 
         const rowToEdge = row => {
             return row.deps.map(dep => {
-                return { data: { source: dep, target: row.id } }
+                return { data: { source: dep, target: row.id} }
             });
         };
-
-        const { rows } = props;
 
         return [...rows.map(row => rowToNode(row))].flat();
     };
@@ -36,12 +36,12 @@ const cytograph = (props) => {
     };
 
     return <CytoscapeComponent elements={[...rowsToHierarchy()]}
-    wheelSensitivity={0.1}
-    style={{
-        width: '100%',
-        height: '90vh',
-        overflow: 'hidden'
-    }}
+        wheelSensitivity={0.1}
+        style={{
+            width: '100%',
+            height: '90vh',
+            overflow: 'hidden'
+        }}
         layout={{
             name: 'breadthfirst',
             directed: true,
@@ -72,7 +72,7 @@ const cytograph = (props) => {
                 "text-valign": "center",
                 "text-halign": "center",
                 "text-wrap": "wrap",
-                "text-max-width": 30,
+                "text-max-width": 80,
                 "color": "#000",
                 "background-color": "#fff",
                 "border-color": "#000",
