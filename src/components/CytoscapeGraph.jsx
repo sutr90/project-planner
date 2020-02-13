@@ -72,7 +72,7 @@ const cytograph = (props) => {
                 "text-valign": "center",
                 "text-halign": "center",
                 "text-wrap": "wrap",
-                "text-max-width": 80,
+                "text-max-width": 100,
                 "color": "#000",
                 "background-color": "#fff",
                 "border-color": "#000",
