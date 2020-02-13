@@ -35,7 +35,9 @@ const cytograph = (props) => {
         });
     };
 
-    return <CytoscapeComponent elements={[...rowsToHierarchy()]} style={{
+    return <CytoscapeComponent elements={[...rowsToHierarchy()]}
+    wheelSensitivity={0.1}
+    style={{
         width: '100%',
         height: '90vh',
         overflow: 'hidden'
